@@ -12,7 +12,6 @@
         <h1>Home Page</h1>
         @if(!Auth::check())
             <button><a href="{{ route('login') }}">Login</a></button>
-            <button><a href="{{ route('auth.google') }}">Login with Google</a></button>
             <button><a href="{{ route('register') }}">Register</a></button>
         @endif
     </main>

@@ -25,8 +25,12 @@ class GoogleLoginController extends Controller
      */
     public function handleGoogleCallback()
     {
-        //create a user using socialite driver google
-        $user = Socialite::driver('google')->user();
-        dd($user);
+        try {
+            $user = Socialite::driver('google')->stateless()->user();
+            dd($user);
+        } catch (InvalidStateException $e) {
+            return redirect('/login')->with('error', 'Something went wrong. Please try again.');
+        }
     }
+
 }

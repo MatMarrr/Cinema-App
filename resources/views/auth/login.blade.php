@@ -11,14 +11,27 @@
                 account</h2>
         </div>
 
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
+
+            <button
+                class="px-4 w-full py-2 border flex justify-center gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
+                <img class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo">
+                <span><a href="{{ route('auth.google') }}">Continue with Google</a></span>
+            </button>
+
+
+            <div class="w-full flex items-center justify-between pt-8">
+                <hr class="w-full bg-gray-400">
+                <p class="text-base font-medium leading-4 px-2.5 text-gray-400">OR</p>
+                <hr class="w-full bg-gray-400  ">
+            </div>
+
             <form class="space-y-6" action="{{route('auth.login')}}" method="POST">
                 @csrf
 
                 @if(session()->has('loginStatus'))
                     {{session()->get('loginStatus')}}
                 @endif
-
                 <div>
                     <label for="login" class="block text-sm font-medium leading-6 text-gray-900">Login</label>
                     <div class="mt-2">
@@ -57,7 +70,8 @@
                 </div>
                 <p class="mt-10 text-center text-sm text-gray-500">
                     Don't have an account?
-                    <a href="{{ route('register') }}" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Register</a>
+                    <a href="{{ route('register') }}"
+                       class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Register</a>
                 </p>
             </form>
 
