@@ -11,25 +11,8 @@ use App\Http\Requests\RegisterRequest;
 
 class AuthController extends Controller
 {
-    public function registerPage()
+    public function register(RegisterRequest $request)
     {
-        return view('auth.register');
-    }
-
-    public function loginPage()
-    {
-        return view('auth.login');
-    }
-
-    public function register(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'login' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
-
         $user = User::create([
             'name' => $request->name,
             'login' => $request->login,
@@ -38,19 +21,14 @@ class AuthController extends Controller
         ]);
 
         if ($user) {
-            return back()->with('registerStatus', 'You are successfully registered');
+            return redirect()->route('login');
         } else {
             return back()->with('registerStatus', 'Something went wrong');
         }
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $request->validate([
-            'login' => 'required|string',
-            'password' => 'required|string|min:6'
-        ]);
-
         $user = $request->only('login', 'password');
 
         if (Auth::attempt($user)) {
