@@ -6,16 +6,13 @@
 
 @section('content')
     <main>
+        <p class="text-3xl font-bold underline">
+            Hello world!
+        </p>
         <h1>Home Page</h1>
-        @if(Auth::check())
-            <h3>Welcome {{ Auth::user()->name }}</h3>
-            <h3>Your role: {{ Auth::user()->role->role_name }}</h3>
-            <button><a href="{{ route('auth.logout') }}">Logout</a></button>
-            @if(Auth::user()->role->role_name === 'admin')
-                <button>Manage Users</button>
-            @endif
-        @else
+        @if(!Auth::check())
             <button><a href="{{ route('login') }}">Login</a></button>
+            <button><a href="{{ route('auth.google') }}">Login with Google</a></button>
             <button><a href="{{ route('register') }}">Register</a></button>
         @endif
     </main>

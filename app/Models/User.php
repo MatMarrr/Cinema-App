@@ -47,7 +47,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the post that owns the comment.
+     * Get the role associated with the user.
      */
     public function role()
     {

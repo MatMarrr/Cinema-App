@@ -17,7 +17,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'login' => $request->login,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
         ]);
 
         if ($user) {
@@ -32,7 +32,7 @@ class AuthController extends Controller
         $user = $request->only('login', 'password');
 
         if (Auth::attempt($user)) {
-            return redirect()->route('home');
+            return redirect()->route('dashboard');
         } else {
             return back()->with('loginStatus', 'wrong username or password');
         }

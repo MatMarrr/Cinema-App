@@ -9,7 +9,7 @@ a {
     text-decoration: none;
 }
 
-.loginContainer, .registerContainer {
+.loginContainer, .registerContainer, .manageUsersContainer {
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -22,4 +22,10 @@ a {
     flex-direction: column;
     max-width: 300px;
     width: 100%;
+}
+
+.users td {
+    text-align: center;
+    border: 1px #fff solid;
+    padding: 10px;
 }

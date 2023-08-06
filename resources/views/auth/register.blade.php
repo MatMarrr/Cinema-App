@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Register
+    Register
 @endsection
 
 @section('content')
@@ -27,7 +27,7 @@ Register
             @error('password')
             <p>{{$message}}</p>
             @enderror
-            <button type="submit">Login</button>
+            <button type="submit">Register</button>
         </form>
     </div>
 @endsection

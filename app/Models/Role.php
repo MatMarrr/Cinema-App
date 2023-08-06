@@ -17,7 +17,7 @@ class Role extends Model
     ];
 
     /**
-     * Get the comments for the blog post.
+     * Get the users associated with the role.
      */
     public function users()
     {
