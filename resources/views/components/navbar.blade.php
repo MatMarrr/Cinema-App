@@ -1,4 +1,4 @@
-<nav class="w-full flex px-8 p-4">
+<nav class="w-full flex px-8 p-4 border-b-2">
     <div class="flex gap-10 justify-center items-center">
         <div>
             <a href="{{ route('home') }}" class="flex items-center gap-4">
