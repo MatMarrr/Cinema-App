@@ -8,40 +8,22 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Services\AuthService;
 
 class AuthController extends Controller
 {
-    public function register(RegisterRequest $request)
+    public function register(RegisterRequest $request, AuthService $authService)
     {
-        $user = User::create([
-            'name' => $request->name,
-            'login' => $request->login,
-            'email' => $request->email,
-            'password' => $request->password,
-        ]);
-
-        if ($user) {
-            return redirect()->route('login');
-        } else {
-            return back()->with('registerStatus', 'Something went wrong');
-        }
+        return $authService->registerUser($request);
     }
 
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request, AuthService $authService)
     {
-        $user = $request->only('login', 'password');
-
-        if (Auth::attempt($user)) {
-            return redirect()->route('dashboard');
-        } else {
-            return back()->with('loginStatus', 'wrong username or password');
-        }
+        return $authService->loginUser($request);
     }
 
-    public function logout()
+    public function logout(AuthService $authService)
     {
-        session()->flush();
-        Auth::logout();
-        return redirect()->route('home');
+        return $authService->logoutUser();
     }
 }
