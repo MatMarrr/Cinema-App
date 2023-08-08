@@ -26,7 +26,7 @@ class AuthService
                     'google_id' => $google_user->id,
                     'name' => $google_user->name,
                     'email' => $google_user->email,
-                    'account_type' => 1,
+                    'account_type' => 2,
                 ]);
 
                 if ($user) {

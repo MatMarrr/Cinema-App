@@ -16,11 +16,13 @@ class HomeController extends Controller
         return view('auth.login');
     }
 
-    public function home(){
+    public function home()
+    {
         return view('home');
     }
 
-    public function dashboard(){
+    public function dashboard()
+    {
         return view('dashboard');
     }
 }

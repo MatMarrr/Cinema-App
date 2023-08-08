@@ -6,10 +6,16 @@
 
 @section('content')
     <div class="max-w-7xl mt-[3rem] mx-auto sm:px-6 lg:px-8">
-<div class="w-full flex justify-between mb-4">
-    <p class="text-lg ml-4">Users</p>
-    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add user</button>
-</div>
+        <div class="w-full flex justify-between items-center mb-4">
+            <p class="text-lg ml-4">Users</p>
+            @if(session()->has('addUserStatus'))
+                <p class="mt-2 text-center text-md text-gray-500">  {{session()->get('addUserStatus')}}</p>
+            @endif
+            <button type="button"
+                    class="hover:scale-105 transition duration-300 ease-in-out inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <a href="{{ route('admin.add.user') }}">Add user</a>
+            </button>
+        </div>
         <div class="flex flex-col">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">

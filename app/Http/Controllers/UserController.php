@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
+use App\Services\AdminService;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateUserRequest;
 
 class UserController extends Controller
 {
@@ -21,16 +24,18 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::all();
+        return view('admin.add_user', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request, AdminService $adminService)
     {
-        //
+        return $adminService->createUser($request);
     }
+
 
     /**
      * Display the specified resource.
