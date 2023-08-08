@@ -15,7 +15,8 @@
 
             <button
                 class="px-4 w-full py-2 border flex justify-center gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
-                <img class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo">
+                <img class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy"
+                     alt="google logo">
                 <span><a href="{{ route('auth.google') }}">Continue with Google</a></span>
             </button>
 
@@ -30,7 +31,10 @@
                 @csrf
 
                 @if(session()->has('loginStatus'))
-                    {{session()->get('loginStatus')}}
+                    <p class="mt-2 text-center text-md text-gray-500">  {{session()->get('loginStatus')}}</p>
+                @endif
+                @if(session()->has('googleLoginStatus'))
+                    <p class="mt-2 text-center text-md text-gray-500">  {{session()->get('googleLoginStatus')}}</p>
                 @endif
                 <div>
                     <label for="login" class="block text-sm font-medium leading-6 text-gray-900">Login</label>

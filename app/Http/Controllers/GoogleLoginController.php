@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class GoogleLoginController extends Controller
@@ -26,8 +28,29 @@ class GoogleLoginController extends Controller
     public function handleGoogleCallback()
     {
         try {
-            $user = Socialite::driver('google')->stateless()->user();
-            dd($user);
+            $google_user = Socialite::driver('google')->stateless()->user();
+            $findGoogleUser = User::where('google_id', $google_user->id)->first();
+
+            if ($findGoogleUser) {
+                Auth::login($findGoogleUser);
+                return redirect()->route('dashboard');
+            } else {
+
+                $user = User::create([
+                    'google_id' => $google_user->id,
+                    'name' => $google_user->name,
+                    'email' => $google_user->email,
+                    'account_type' => 1,
+                ]);
+
+                if ($user) {
+                    Auth::login($user);
+                    return redirect()->route('dashboard');
+                } else {
+                    return back()->with('googleLoginStatus', 'Something went wrong, please try again');
+                }
+            }
+
         } catch (InvalidStateException $e) {
             return redirect('/login')->with('error', 'Something went wrong. Please try again.');
         }

@@ -10,6 +10,7 @@
     <title>@yield('title')</title>
 </head>
 <body class="h-full">
+@include('components.navbar')
 @yield('content')
 </body>
 </html>
