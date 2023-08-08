@@ -18,7 +18,8 @@ return new class extends Migration {
             $table->string('name');
             $table->string('login')->nullable()->default(null)->unique();
             $table->string('email')->unique();
-            $table->integer('account_type')->default(0);
+            $table->unsignedBigInteger('account_type')->default(1);
+            $table->foreign('account_type')->references('id')->on('account_types')->onDelete('cascade');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable()->default(null);
             $table->rememberToken();

@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -51,8 +52,16 @@ class User extends Authenticatable
     /**
      * Get the role associated with the user.
      */
-    public function role()
+    public function role(): BelongsTo
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Role::class, );
+    }
+
+    /**
+     * Get the account type associated with the user.
+     */
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(AccountType::class, 'account_type');
     }
 }
