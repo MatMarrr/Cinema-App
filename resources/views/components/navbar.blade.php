@@ -1,9 +1,9 @@
 <nav class="w-full flex px-8 p-4 border-b-2">
     <div class="flex gap-10 justify-center items-center">
         <div>
-            <a href="{{ route('home') }}" class="flex items-center gap-4">
-                <img src="{{ asset('icons/movie_icon.svg') }}" alt="Movie icon" class="w-12">
-                <p class="text-2xl">Cinema App</p>
+            <a href="{{ route('home') }}" class="flex items-center gap-6">
+                <img src="{{ asset('icons/LightModeLogo.png') }}" alt="Movie icon" class="w-20">
+                <p class="text-2xl">Movie Mates</p>
             </a>
         </div>
         <div>
@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <div class="ml-auto flex gap-6">
+    <div class="ml-auto flex gap-6 items-center">
         @if(!Auth::check())
             <button type="button"
                     class="hover:scale-105 transition duration-300 ease-in-out inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

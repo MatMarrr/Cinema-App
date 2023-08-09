@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
     <title>@yield('title')</title>
 </head>
-<body class="h-full">
+<body class="max-h-screen">
 @include('components.navbar')
 @yield('content')
 </body>

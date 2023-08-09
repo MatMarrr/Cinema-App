@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountType;
 use App\Models\Role;
 use App\Models\User;
 use App\Services\AdminService;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\AdminUpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -40,25 +42,44 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $user_id)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $user_id)
     {
-        //
+        $user = User::find($user_id);
+        $roles = Role::all();
+        return view('admin.edit_user', compact('user', 'roles', 'user_id'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AdminUpdateUserRequest $request, string $user_id)
     {
-        //
+        $user = User::find($user_id);
+
+        if (!$user) {
+            return redirect()->route('admin.manage.users')->with('updateUserStatus', 'There is no user with choosen id');
+        }
+
+        try {
+            $user->update([
+                'name' => $request->name,
+                'login' => $request->login,
+                'email' => $request->email,
+                'role_id' => $request->role_id,
+            ]);
+
+            return redirect()->route('admin.manage.users')->with('updateUserStatus', 'Succesfully updated an user');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.manage.users')->with('updateUserStatus', $e);
+        }
     }
 
     /**

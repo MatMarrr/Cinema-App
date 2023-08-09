@@ -11,6 +11,9 @@
             @if(session()->has('addUserStatus'))
                 <p class="mt-2 text-center text-md text-gray-500">  {{session()->get('addUserStatus')}}</p>
             @endif
+            @if(session()->has('updateUserStatus'))
+                <p class="mt-2 text-center text-md text-gray-500">  {{session()->get('updateUserStatus')}}</p>
+            @endif
             <button type="button"
                     class="hover:scale-105 transition duration-300 ease-in-out inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <a href="{{ route('admin.add.user') }}">Add user</a>
@@ -27,6 +30,10 @@
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Name
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Login
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -53,6 +60,9 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                         {{$user->name}}
                                     </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        {{$user->login ?  : "-"}}
+                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         {{$user->email}}
                                     </td>
@@ -63,11 +73,11 @@
                                         {{$user->role->role_name}}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                        <a href="{{ route('admin.edit.user',['user_id'=>$user->id]) }}"
+                                           class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                     </td>
                                 </tr>
                             @endforeach
-
 
                             </tbody>
                         </table>

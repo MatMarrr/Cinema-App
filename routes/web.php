@@ -43,6 +43,8 @@ Route::middleware(['auth'])->group(function(){
     Route::middleware(IsAdmin::class)->group(function(){
         Route::get('/manage-users', [UserController::class, 'index'])->name('admin.manage.users');
         Route::get('/add-user', [UserController::class, 'create'])->name('admin.add.user');
+        Route::get('/edit-user/{user_id}', [UserController::class, 'edit'])->name('admin.edit.user');
+        Route::post('/update-user/{user_id}', [UserController::class, 'update'])->name('admin.update.user');
         Route::post('/create-user', [UserController::class, 'store'])->name('admin.create.user');
     });
 });
