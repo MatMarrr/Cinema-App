@@ -85,8 +85,20 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function deleteUserModal(string $user_id)
     {
-        //
+        $user_name = User::find($user_id)->name;
+        return back()->with(['showDeleteUserModal' => true, 'user_id' => $user_id, 'user_name' => $user_name]);
+    }
+
+    public function destroy(string $user_id)
+    {
+        $user = User::find($user_id);
+        if ($user) {
+            $user->delete();
+            return redirect()->route('admin.manage.users')->with('deleteUserStatus', 'Succesfully deleted user');
+        } else {
+            return redirect()->route('admin.manage.users')->with('deleteUserStatus', 'User not found or there was a problem while deleting the user');
+        }
     }
 }

@@ -36,16 +36,18 @@ Route::middleware(CheckGuest::class)->group(function () {
 /**
  * Routes accessible only to authenticated users.
  */
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-    Route::middleware(IsAdmin::class)->group(function(){
+    Route::middleware(IsAdmin::class)->group(function () {
         Route::get('/manage-users', [UserController::class, 'index'])->name('admin.manage.users');
         Route::get('/add-user', [UserController::class, 'create'])->name('admin.add.user');
         Route::get('/edit-user/{user_id}', [UserController::class, 'edit'])->name('admin.edit.user');
+        Route::get('/delete-user-modal/{user_id}', [UserController::class, 'deleteUserModal'])->name('admin.delete.user.modal');
         Route::post('/update-user/{user_id}', [UserController::class, 'update'])->name('admin.update.user');
         Route::post('/create-user', [UserController::class, 'store'])->name('admin.create.user');
+        Route::delete('/delete-user/{user_id}', [UserController::class, 'destroy'])->name('admin.delete.user');
     });
 });
 

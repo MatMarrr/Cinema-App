@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
     <div class="max-w-7xl mt-[3rem] mx-auto sm:px-6 lg:px-8">
         <div class="w-full flex justify-between items-center mb-4">
             <p class="text-lg ml-4">Users</p>
