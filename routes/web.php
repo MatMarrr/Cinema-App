@@ -39,6 +39,8 @@ Route::middleware(CheckGuest::class)->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+    Route::get('/profile/{user_id}', [UserController::class, 'show'])->name('profile');
+    Route::post('/search', [UserController::class, 'searchForFriends'])->name('search');
 
     Route::middleware(IsAdmin::class)->group(function () {
         Route::get('/manage-users', [UserController::class, 'index'])->name('admin.manage.users');

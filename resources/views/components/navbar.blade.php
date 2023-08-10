@@ -8,13 +8,19 @@
         </div>
         <div>
 
-            <a href="{{ route('home') }}" class="text-xl">
+            <a href="{{ route('home') }}" class="text-xl mr-10">
                 @if(!Auth::check())
                     Home
                 @else
                     Dashboard
                 @endif
             </a>
+
+            @if(Auth::check())
+                <a href="{{ route('profile', ['user_id' => Auth::User()->id]) }}" class="text-xl  mr-10">
+                    Profile
+                </a>
+            @endif
 
         </div>
     </div>

@@ -44,7 +44,21 @@ class UserController extends Controller
      */
     public function show(string $user_id)
     {
+        $user = User::find($user_id);
+        return view('profile', compact('user'));
+    }
 
+    public function searchForFriends(Request $request)
+    {
+        $search_by = $request->search_by;
+        $search_param = '%' . $request->search_param . '%';
+
+        if (in_array($search_by, ['name', 'email'])) {
+            $users = User::where($search_by, 'LIKE', $search_param)->get();
+            return view('search', compact('users'));
+        } else {
+            return redirect()->route('profile')->with('searchStatus', 'There was an error while searching for user');
+        }
     }
 
     /**
