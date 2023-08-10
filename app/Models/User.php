@@ -5,6 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -64,5 +66,29 @@ class User extends Authenticatable
     public function account(): BelongsTo
     {
         return $this->belongsTo(AccountType::class, 'account_type');
+    }
+
+    /**
+     * Get the invitations sent by the user.
+     */
+    public function sentInvitations(): HasMany
+    {
+        return $this->hasMany(Invitation::class, 'sender_id');
+    }
+
+    /**
+     * Get the invitations received by the user.
+     */
+    public function receivedInvitations(): HasMany
+    {
+        return $this->hasMany(Invitation::class, 'receiver_id');
+    }
+
+    /**
+     * Get the friends associated with the user.
+     */
+    public function friends(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id');
     }
 }
