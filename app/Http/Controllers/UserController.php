@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\AccountType;
+use App\Models\Invitation;
 use App\Models\Role;
 use App\Models\User;
 use App\Services\AdminService;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\AdminUpdateUserRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -58,6 +60,20 @@ class UserController extends Controller
             return view('search', compact('users'));
         } else {
             return redirect()->route('profile')->with('searchStatus', 'There was an error while searching for user');
+        }
+    }
+
+    public function inviteUserToFriends(Request $request)
+    {
+        $invite = Invitation::create([
+            'sender_id' => Auth::user()->id,
+            'receiver_id' => $request->friend_id
+        ]);
+
+        if ($invite) {
+            return redirect()->route('profile', ['user_id'=> Auth::user()->id]);
+        } else {
+            return redirect()->route('profile', ['user_id'=> Auth::user()->id]);
         }
     }
 

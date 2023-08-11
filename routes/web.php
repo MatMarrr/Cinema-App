@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::get('/profile/{user_id}', [UserController::class, 'show'])->name('profile');
     Route::post('/search', [UserController::class, 'searchForFriends'])->name('search');
+    Route::post('/invite-user', [UserController::class, 'inviteUserToFriends'])->name('invite.user');
 
     Route::middleware(IsAdmin::class)->group(function () {
         Route::get('/manage-users', [UserController::class, 'index'])->name('admin.manage.users');
@@ -53,6 +54,8 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+
+Route::resource('teams' , UserController::class);
 
 
 

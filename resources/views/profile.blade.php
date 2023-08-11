@@ -18,7 +18,7 @@
                 <option value="email">Email</option>
             </select>
             <input type="text" name="search_param" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block min-w-md sm:text-sm border-gray-300 rounded-md mr-3">
-            <input type="submit" value="Search" class="hover:scale-105 hover:cursor-pointer transition duration-300 ease-in-out inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"></input>
+            <input type="submit" value="Search" class="hover:scale-105 hover:cursor-pointer transition duration-300 ease-in-out inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
         </form>
     </div>
 @endsection

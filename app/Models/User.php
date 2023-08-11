@@ -91,4 +91,21 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id');
     }
+
+    /**
+     * Check if the user has already invited another user by their ID.
+     */
+    public function hasInvited(int $userId): bool
+    {
+        return $this->sentInvitations()->where('receiver_id', $userId)->exists();
+    }
+
+    /**
+     * Check if the user has another user as a friend by their ID.
+     */
+    public function hasFriend(int $friendId): bool
+    {
+        return $this->friends->contains($friendId);
+    }
+
 }
